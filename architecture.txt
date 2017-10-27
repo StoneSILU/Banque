@@ -1,10 +1,9 @@
 Architecture projet:
 - app : front
 - models : schemas
-- controllers : fonctions appelés par le routing
+- controllers : fonctions appelï¿½s par le routing
 - routes.js
 - server.js
-
 Models:
 
 - User
