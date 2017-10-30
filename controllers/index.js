@@ -6,11 +6,18 @@ let jwt = require('jsonwebtoken');
 
 module.exports = {
     getAngularApp: function(request, response, next) {
-        response.sendFile('index.html', {root: './app/'}, function(err) {
-            if (err) sendJSONError(response, 'Erreur server angular app');
+        response.sendFile('index.html', {root: './app/src/'}, function(err) {
+            if (err) sendJSONError(response, err);
         });
     },
     login: function(req, res) {
-
+        console.log('login')
+        res.end('toto')
     } 
+}
+function sendJSONError(response, msg, data) {
+    var error = { error: msg };
+    if (data) error.data = data;
+    response.status(500);
+    response.send(JSON.stringify(error));
 }

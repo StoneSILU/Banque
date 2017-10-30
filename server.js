@@ -4,7 +4,7 @@ var colors = require('colors');
 var express = require('express');
 var app = express();
 var http  = require('http').Server(app);
-var port = 1338;
+var port = 1339;
 
 var listener = http.listen(port, '0.0.0.0', function() {
     console.log(' Express -> '.black.bgGreen+(' listening on *:'+port).green);
@@ -45,9 +45,6 @@ var passport = require('passport')
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://stivynho:Undertaker94@airbnpito-shard-00-00-4vdbk.mongodb.net:27017,airbnpito-shard-00-01-4vdbk.mongodb.net:27017,airbnpito-shard-00-02-4vdbk.mongodb.net:27017/test?ssl=true&replicaSet=AirBnPito-shard-0&authSource=admin');
 var db = mongoose.connection;
-
-var mongooseAutoIncrement = require('mongoose-auto-increment');
-mongooseAutoIncrement.initialize(db);
 
 db.on('error', function() { console.log(' MongoDB -> '.black.bgRed+' connection error to qwirk@localhost'.red); });
 db.once('open', function() { console.log(' MongoDB -> '.black.bgGreen+' connected to qwirk@localhost'.green); });

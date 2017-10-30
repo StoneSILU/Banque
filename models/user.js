@@ -5,7 +5,7 @@ let Hash = require('password-hash');
 var UserSchema = mongoose.Schema({
 firstName: { type: String, maxlength: 50 },
 lastName: { type: String, maxlength: 50 },
-mail: { type: String, unique: true},
+email: { type: String, unique: true},
 password: { type: String, set: function(newValue) {
     return Hash.isHashed(newValue) ? newValue : Hash.generate(newValue);
 } },

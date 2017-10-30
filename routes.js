@@ -7,28 +7,35 @@ let passport = require('passport')
 let router = express.Router();
 
 passport.use(new LocalStrategy(
-	function(username, password, done) {
-		User.getUserByUsername(username, function(err, user){
+	function(email, password, done) {
+		User.getUserByEmail(email, function(err, user){
 			if (err) {
-				console.log('erreur bizarre')
+                console.log('erreur bizarre')
+                return done("pas d' user")
 			}
 			if(!user) {
+                console.log('pas duser')
 				return done(null, false, {message: "Unknown User"})
 			} 
-			User.comparePassword(password, user.password, function(err, isMatch) {
-				if (err){
-					console.log('erreur bizarre')
-				}
-
-				if (isMatch) 
-				{
-					return done(null, user);
-				} 
-				else 
-				{
-					return done(null, false, {message: 'Invalid Password'})
-				}
-			})
+			if (user) {
+				console.log('user')
+				console.log(user)
+				User.comparePassword(password, user.password, function(err, isMatch) {
+					if (err){
+						console.log('erreur bizarre')
+						return done('erreur')
+					}
+	
+					if (isMatch) 
+					{
+						return done(null, user);
+					} 
+					else 
+					{
+						return done(null, false, {message: 'Invalid Password'})
+					}
+				})
+			}
 		})
 	}
 ));
@@ -38,7 +45,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-	User.getUserById(id, function(err, user) {
+	User.getUserByEmail(email, function(err, user) {
 		done(err,user);
 	})
 });
@@ -54,11 +61,18 @@ router.all("/api/*", function (req, res, next) {
     return next();
 });
 
-router.get('/login', 
+router.get('/login', function(req, res) {
+	console.log('toto')
+	res.end('toto')
+})
+
+router.post('/login', 
     passport.authenticate('local',{
         session: false
     }),
-    Controller.login
+    function(req, res) {
+        res.end('toto');
+    }
 );
 
 module.exports = router;
