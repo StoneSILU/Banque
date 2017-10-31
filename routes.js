@@ -1,6 +1,7 @@
 let express = require('express');
 let Controller = require('./controllers');
 let User = require('./models/user');
+let jwt = require('jsonwebtoken');
 let passport = require('passport')
 , LocalStrategy = require('passport-local').Strategy; 
 
@@ -18,12 +19,10 @@ passport.use(new LocalStrategy(
 				return done(null, false, {message: "Unknown User"})
 			} 
 			if (user) {
-				console.log('user')
-				console.log(user)
 				User.comparePassword(password, user.password, function(err, isMatch) {
 					if (err){
 						console.log('erreur bizarre')
-						return done('erreur')
+						return done(null, false, 'erreur')
 					}
 	
 					if (isMatch) 
@@ -62,16 +61,23 @@ router.all("/api/*", function (req, res, next) {
 });
 
 router.get('/login', function(req, res) {
-	console.log('toto')
 	res.end('toto')
 })
 
 router.post('/login', 
-    passport.authenticate('local',{
-        session: false
-    }),
-    function(req, res) {
-        res.end('toto');
+passport.authenticate('local',{
+	session: false
+}),
+function(req, res) {
+	let payload = { username: req.user.username, _id: req.user._id }
+	let token = jwt.sign(payload, 'qwirk', { expiresIn: 60*60*24 });
+	res.status(200);
+	res.send(JSON.stringify({
+		user: req.user,
+		token: token, 
+		hasErrors: false,
+		message: "You are log"
+	}));
     }
 );
 

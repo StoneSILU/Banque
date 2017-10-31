@@ -43,7 +43,7 @@ app.use(expressValidator({
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://stivynho:Undertaker94@airbnpito-shard-00-00-4vdbk.mongodb.net:27017,airbnpito-shard-00-01-4vdbk.mongodb.net:27017,airbnpito-shard-00-02-4vdbk.mongodb.net:27017/test?ssl=true&replicaSet=AirBnPito-shard-0&authSource=admin');
+mongoose.connect('mongodb://stivynho:Undertaker94@airbnpito-shard-00-00-4vdbk.mongodb.net:27017,airbnpito-shard-00-01-4vdbk.mongodb.net:27017,airbnpito-shard-00-02-4vdbk.mongodb.net:27017/bank?ssl=true&replicaSet=AirBnPito-shard-0&authSource=admin');
 var db = mongoose.connection;
 
 db.on('error', function() { console.log(' MongoDB -> '.black.bgRed+' connection error to qwirk@localhost'.red); });
