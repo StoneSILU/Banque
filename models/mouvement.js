@@ -6,6 +6,10 @@ var MouvementSchema = mongoose.Schema({
     date: { type: Number, max: Date.now() },
 });
 
+MouvementSchema.statics.getCompteMouvement = function (compte_id, callback) {
+    this.find({ compte_id: compte_id }, callback)
+}
+
 MouvementSchema.plugin(passportLocalMongoose);
 
 var Mouvement = mongoose.model('Mouvement', MouvementSchema);

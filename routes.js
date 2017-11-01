@@ -81,4 +81,8 @@ router.post('/login',
 
 router.get('/api/getcomptes', Controller.getComptes)
 
+router.get('/api/getmouvements', Controller.getCompteMouvements)
+
+router.get('/api/getvirements', Controller.getVirements)
+
 module.exports = router;

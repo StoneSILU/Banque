@@ -1,6 +1,8 @@
 let mongoose = require('mongoose');
+let passportLocalMongoose = require('passport-local-mongoose');
 
-var MouvementSchema = mongoose.Schema({
+
+var VirementSchema = mongoose.Schema({
     recipient_id: { type: mongoose.SchemaTypes.ObjectId },
     sender_id: { type: mongoose.SchemaTypes.ObjectId },
     montant: { type: Number },
@@ -8,8 +10,12 @@ var MouvementSchema = mongoose.Schema({
     iban: { type: String },
 });
 
-MouvementSchema.plugin(passportLocalMongoose);
+VirementSchema.statics.getUserVirements = function (user_id, callback) {
+    this.find({ sender_id: user_id }, callback)
+}
 
-var Mouvement = mongoose.model('Mouvement', MouvementSchema);
+VirementSchema.plugin(passportLocalMongoose);
 
-module.exports = Mouvement;
+var Virement = mongoose.model('Virement', VirementSchema);
+
+module.exports = Virement;
