@@ -6,9 +6,6 @@ let app = express();
 let http = require('http').Server(app);
 let port = 1339;
 
-let io = require('socket.io').listen(http);
-
-
 let listener = http.listen(port, '0.0.0.0', function () {
   console.log(' Express -> '.black.bgGreen + (' listening on *:' + port).green);
 });
