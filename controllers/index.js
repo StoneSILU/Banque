@@ -20,7 +20,6 @@ module.exports = {
     getComptes: function(req, res) {
         Compte.getUserComptes(req.user._id, (err, comptes) => {
             if (err) {
-                console.log('getComptes erreur')
                 res.status(200);
                 res.send(JSON.stringify({
                     hasErrors: true,
@@ -56,12 +55,12 @@ module.exports = {
         })
     },
     getCompteMouvements: function (req, res) {
+        console.log('getCompteMouvements')
         let compte_id = req.query.compte_id;
         
         if (compte_id) {
             Mouvement.getCompteMouvements(compte_id, (err, mouvements) => {
                 if (err) {
-                    console.log('getComptes erreur')
                     res.status(200);
                     res.send(JSON.stringify({
                         hasErrors: true,
@@ -78,9 +77,9 @@ module.exports = {
             })
         }
     }, 
-    createMouvement: function(req, res) {
+    // createMouvement: function(req, res) {
         
-    }
+    // }
 }
 function sendJSONError(response, msg, data) {
     var error = { error: msg };
