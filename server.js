@@ -15,13 +15,14 @@ let listener = http.listen(port, '0.0.0.0', function () {
 
 let io = require('socket.io').listen(http);
 
-// io.on('connection', function (socket) {
+io.on('connection', function (socket) {
 
-//   socket.on('emit', function (msg) {
-//     console.log("clean message")
-//     io.sockets.in(msg.conversationId).emit('message', msg)
-//   })
-// })
+  socket.on('emit', function (msg) {
+    socket.broadcast.emit('new message', {
+      message: msg
+    });
+  })
+})
 
 let expressJwt = require('express-jwt');
 let jwt = require('jsonwebtoken');
