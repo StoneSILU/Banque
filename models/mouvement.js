@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let passportLocalMongoose = require('passport-local-mongoose');
 
 var MouvementSchema = mongoose.Schema({
     compte_id: { type: mongoose.SchemaTypes.ObjectId },
@@ -6,7 +7,7 @@ var MouvementSchema = mongoose.Schema({
     date: { type: Number, max: Date.now() },
 });
 
-MouvementSchema.statics.getCompteMouvement = function (compte_id, callback) {
+MouvementSchema.statics.getCompteMouvements = function (compte_id, callback) {
     this.find({ compte_id: compte_id }, callback)
 }
 

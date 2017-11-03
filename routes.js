@@ -51,7 +51,7 @@ router.route(['/', '/index']).get(
 	Controller.getAngularApp
 );
 
-router.all("/api/*", function (req, res, next) {
+router.all("/*", function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
 	res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
@@ -67,7 +67,7 @@ router.post('/login',
 		session: false
 	}),
 	function (req, res) {
-		let payload = { username: req.user.username, _id: req.user._id }
+		let payload = { _id: req.user._id }
 		let token = jwt.sign(payload, 'bank', { expiresIn: 60 * 60 * 24 });
 		res.status(200);
 		res.send(JSON.stringify({
@@ -81,7 +81,7 @@ router.post('/login',
 
 router.get('/api/getcomptes', Controller.getComptes)
 
-router.get('/api/getmouvements', Controller.getCompteMouvements)
+router.get('/getmouvements', Controller.getCompteMouvements)
 
 router.get('/api/getvirements', Controller.getVirements)
 

@@ -3,6 +3,7 @@ let passport = require('passport')
 let User = require('../models/user');
 let Compte = require('../models/compte');
 let Virement = require('../models/virement');
+let Mouvement = require('../models/mouvement');
 let jwt = require('jsonwebtoken');
 
 
@@ -55,7 +56,8 @@ module.exports = {
         })
     },
     getCompteMouvements: function (req, res) {
-        let compte_id = req.body.compte_id
+        let compte_id = req.query.compte_id;
+        
         if (compte_id) {
             Mouvement.getCompteMouvements(compte_id, (err, mouvements) => {
                 if (err) {
