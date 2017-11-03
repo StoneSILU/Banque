@@ -4,6 +4,7 @@ let passportLocalMongoose = require('passport-local-mongoose');
 var MouvementSchema = mongoose.Schema({
     compte_id: { type: mongoose.SchemaTypes.ObjectId },
     montant: { type: Number },
+    libelle: { type: String },
     date: { type: Number, max: Date.now() },
 });
 
