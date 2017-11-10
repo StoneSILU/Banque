@@ -3,11 +3,10 @@ let passportLocalMongoose = require('passport-local-mongoose');
 
 
 var VirementSchema = mongoose.Schema({
-    recipient_id: { type: mongoose.SchemaTypes.ObjectId },
-    sender_id: { type: mongoose.SchemaTypes.ObjectId },
+    recipient_iban: { type: String },
+    sender_id: { type: String },
     montant: { type: Number },
-    date: { type: Number, max: Date.now() },
-    iban: { type: String },
+    date: { type: Number },
 });
 
 VirementSchema.statics.getUserVirements = function (user_id, callback) {

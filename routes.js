@@ -79,6 +79,8 @@ router.post('/login',
 	}
 )
 
+router.post('/api/addvirement', Controller.addVirement)
+
 router.get('/api/getcomptes', Controller.getComptes)
 
 router.get('/api/getmouvements', Controller.getCompteMouvements)

@@ -79,7 +79,33 @@ module.exports = {
     }, 
     // createMouvement: function(req, res) {
         
-    // }
+    // },
+    addVirement: function(req, res) {
+        const dataVirement = {
+            recipient_iban: req.body.recipient_iban,
+            sender_id: req.user._id,
+            date: req.body.date,
+            montant: req.body.montant
+        }
+        let newVirement = new Virement(dataVirement);
+        newVirement.save( (err, user) => {
+            if (err) {
+                res.send({
+                    hasErrors: true,
+                    data: {
+                        message: err
+                    }
+                })
+            } else {
+                res.send({
+                    hasErrors: false,
+                    data: {
+                        message: 'virement crée'
+                    }
+                })
+            }
+        });
+    }
 }
 function sendJSONError(response, msg, data) {
     var error = { error: msg };
