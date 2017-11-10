@@ -15,7 +15,7 @@ let io = require('socket.io').listen(http);
 io.on('connection', function (socket) {
 
   socket.on('emit', function (msg) {
-    socket.broadcast.emit('new message', {
+    io.sockets.emit('newmessage', {
       message: msg
     });
   })
